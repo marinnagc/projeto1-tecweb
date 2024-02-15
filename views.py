@@ -1,4 +1,4 @@
-from utils import load_data, load_template
+from utils import load_data, load_template, add_note_to_file, build_response
 import urllib
 import json
 
@@ -20,7 +20,9 @@ def index(request):
             chave_valor = chave_valor.split('=')
             valor = urllib.parse.unquote_plus(chave_valor[1], encoding='utf-8', errors='replace')
             params[chave_valor[0]] = valor
-        
+        # Salva as informações no arquivo
+        add_note_to_file("notes.json",params)
+        return build_response(code=303, reason='See Other', headers='Location: /')
     # Cria uma lista de <li>'s para cada anotação
     # Se tiver curiosidade: https://docs.python.org/3/tutorial/datastructures.html#list-comprehensions
     note_template = load_template('components/note.html')

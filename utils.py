@@ -42,10 +42,18 @@ def load_template(file):
         texto = file.read()
     return texto
 
+def add_note_to_file(file_json,dic_notes):
+    with open("data/{0}".format(file_json)) as arquivo:
+        lista_de_dicionarios = json.load(arquivo)
+    lista_de_dicionarios.append(dic_notes)
+    with open("data/{0}".format(file_json), 'w') as file:
+        return json.dump(lista_de_dicionarios, file, indent=2)
+    
+
 def build_response(body='', code=200, reason='OK', headers=''):
     # Constrói a resposta HTTP formatada
     response = f'HTTP/1.1 {code} {reason}\n'
-    response += f'Content-Length: {len(body)}\n'
+
     
     if headers:
         response += f'{headers}\n'
