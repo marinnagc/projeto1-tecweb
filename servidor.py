@@ -27,7 +27,7 @@ while True:
        # ERA ASSIM: response = 'HTTP/1.1 200 OK\n\n'.encode() + read_file(filepath)
         response = read_file(filepath)
     elif route == '':
-        response = index()
+        response = index(request)
     else:
         response = bytes()
     client_connection.sendall('HTTP/1.1 200 OK\n\n'.encode() + response)

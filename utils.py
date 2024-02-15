@@ -41,3 +41,16 @@ def load_template(file):
     with open(f"templates/{file}", 'r') as file:
         texto = file.read()
     return texto
+
+def build_response(body='', code=200, reason='OK', headers=''):
+    # Constrói a resposta HTTP formatada
+    response = f'HTTP/1.1 {code} {reason}\n'
+    response += f'Content-Length: {len(body)}\n'
+    
+    if headers:
+        response += f'{headers}\n'
+
+    response += '\n'
+    response += body
+
+    return response.encode()
