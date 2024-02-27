@@ -57,6 +57,9 @@ def build_response(body='', code=200, reason='OK', headers=''):
     
     if headers:
         response += f'{headers}\n'
+    else:
+        response += f'{headers}'
+        
 
     response += '\n'
     response += body
